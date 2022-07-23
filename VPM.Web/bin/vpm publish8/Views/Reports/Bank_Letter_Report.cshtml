@@ -1,0 +1,76 @@
+﻿
+
+@{
+    ViewBag.Title = "Bank Letter Report";
+}
+<div class="container-fluid body-content" ng-controller="BankLetterReport">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Bank Letter Report</strong></a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <form>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-4">
+                        <label for="">From Date</label>
+                        <input type="date" class="form-control" id="fromDate" ng-model="fromDate">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">To Date</label>
+                        <input type="date" class="form-control" id="toDate" ng-model="toDate">
+                    </div>
+                    <div class="form-group col-md-4 mt-4">
+                        <button type="submit" class="btn btn-primary align-bottom" ng-click="Search(fromDate,toDate)">
+                            <span ng-show="searchButtonText == 'Searching'">
+                                <img style="width:20px;height:20px;" src="~/images/loader.gif" />
+                            </span>
+                            {{ searchButtonText }}
+
+                        </button>
+                    </div>
+                </div>
+            </form>
+            @*<hr>
+                <div class="p-2">
+                    <div class="">
+                        <select class="custom-select col-sm-2 float-right" id="inlineFormCustomSelect">
+                            <option selected="">Action</option>
+                            <option value="1">Export to Excel</option>
+                            <option value="2">Export to PDF</option>
+                            <option value="3">Email</option>
+                        </select>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <table class="table table-hover table-bordered display nowrap" id="table_id">
+                <thead>
+                    <tr style="background-color:darkgrey">
+                        <th scope="col">Sr No</th>
+                        <th scope="col">Vendor Name</th>
+                        <th scope="col">Payable At</th>
+                        <th scope="col">Net Amt</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:right">Total:</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+

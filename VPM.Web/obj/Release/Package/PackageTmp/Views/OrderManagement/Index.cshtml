@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Order Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+
+<div class="col-md-12 p-0">
+    <ul class="nav">
+        <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="/OrderManagement/Item/0">Order Management</a> </li>
+    </ul>
+    <hr class="m-0">
+</div>
+<article class="col-md-12">
+    <div class="pt-3">
+        <div class="mb-4"> <a href="/OrderManagement/Item/0" class="btn btn-secondary float-right ml-1">+</a></div>
+    </div>
+</article>
+<br />
+
+<div ng-app="myApp" ng-controller="OrderManagementList">
+    <div style="overflow:auto">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr style="background-color:darkgrey">
+                    <th>SrNo</th>
+                    <th>System_Date</th>
+                    <th>System_Time</th>
+                    <th>Scheme_Name</th>
+                    <th>Secuity_Type</th>
+                    <th>Security_Name</th>
+                    <th>Buy_And_Sale</th>
+                    <th>Amount</th>
+                    <th>Price_Or_Yield</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in OrderManagement_grid_data">
+                    <td>{{$index+1}}</td>
+                    <td><a href="/OrderManagement/Item/{{item.ID}}">{{item.system_date | date:'dd-MMM-yyyy'}}</a></td>
+                    <td>{{item.system_time | date:"hh:mm"}}</td>
+                    <td>{{item.scheme_name}}</td>
+                    <td>{{item.security_type}}</td>
+                    <td>{{item.security_name}}</td>
+                    <td>{{item.toggle}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.price_yield}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

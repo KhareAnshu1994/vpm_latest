@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Vendor Master";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/PartyMaster">Vendor Master</a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form ng-controller="PartyMasterController">
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-4">
+                        <label for="">Vendor Name</label>
+                        <input type="text" class="form-control" id="PartyName" placeholder="Name" ng-model="model.PartyName" validator="[required]" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Location</label>
+                        <input type="text" class="form-control" id="Location" placeholder="Location" ng-model="model.Location" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">BankName</label>
+                        <select ng-model="model.BankId" ng-options="item.ID as item.Name for item in lst_Banks" class="form-control" ></select>
+                    </div>
+                </div>
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-4">
+                        <label for="">IFSC Code</label>
+                        <input type="text" class="form-control" id="IFSCCODE" placeholder="IFSC Code" ng-model="model.IFSCCODE" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Account NO</label>
+                        <input type="text" class="form-control" id="AccountNo" placeholder="Account NO" ng-model="model.AccountNo" >
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">GST NO</label>
+                        <input type="text" class="form-control" id="GSTNO" placeholder="GST NO" ng-model="model.GSTNO" >
+                    </div>
+                </div>
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-4">
+                        <label for="">Address1</label>
+                        <textarea class="form-control" id="Address1" placeholder="Address1" ng-model="model.Address1" ></textarea>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Address2</label>
+                        <textarea class="form-control" id="Address2" placeholder="Address2" ng-model="model.Address2"></textarea>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Address3</label>
+                        <textarea class="form-control" id="Address3" placeholder="Address3" ng-model="model.Address3"></textarea>
+                    </div>
+                </div>
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-4">
+                        <label for="">State</label>
+                        <textarea class="form-control" id="State" placeholder="State" ng-model="model.State"></textarea>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="">Pincode</label>
+                        <textarea class="form-control" id="Pincode" placeholder="Pincode" ng-model="model.Pincode"></textarea>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">Remark</label>
+                        <textarea class="form-control" id="Remark" placeholder="Remark" ng-model="model.Remark"></textarea>
+                    </div>
+                </div>
+                <div class="form-row mt-2">
+                    <div class="form-group col-md-4">
+                        <label for="">PAN NO</label>
+                        <input type="text" class="form-control" id="PANNO" placeholder="PAN NO" ng-model="model.PANNO">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="">IsActive</label>
+                        <input ng-checked="model.IsActive" type="checkbox" id="gridCheck1" ng-model="model.IsActive">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mt-1">
+                        <button type="submit" class="btn btn-primary" ng-click="Save()">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Scheme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-12 p-0">
+    <ul class="nav">
+        <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="/Scheme/Item/0">Scheme Master</a> </li>
+    </ul>
+    <hr class="m-0">
+</div>
+<article class="col-md-12">
+    <div class="pt-3">
+        <div class="mb-4"> <a href="/Scheme/Item/0" class="btn btn-secondary float-right ml-1">+</a></div>
+    </div>
+</article>
+<br />
+
+<div ng-app="myApp" ng-controller="SchemeList">
+    <div class="tbl_grid_scrolling">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr style="background-color:darkgrey">
+                    <th>SrNo</th>
+                    <th>Scheme_Code</th>
+                    <th>Scheme_Name</th>
+                    <th>Is Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in scheme_grid_data">
+                    <td>{{$index+1}}</td>
+                    <td><a href="/Scheme/Item/{{item.ID}}">{{item.Code}}</a></td>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.IsActive}} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

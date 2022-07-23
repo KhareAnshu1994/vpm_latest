@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Rating Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12 p-0">
+    <ul class="nav">
+        <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="/Rating">Rating Master</a> </li>
+    </ul>
+    <hr class="m-0">
+</div>
+
+<br />
+<div ng-controller="Rating" ng-app="myApp">
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="">Period</label>
+                <select ng-model="model.Code" id="Code" ng-options="x.Name as x.Name for x in periods" class="form-control"></select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Rating_Code</label>
+                <input type="text" class="form-control" id="inputPassword3" ng-model="model.Rating">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Rating_Name</label>
+                <input type="text" class="form-control" id="inputPassword3" ng-model="model.Rating_Name">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="">Rating Value</label>
+                <input type="text" class="form-control" id="inputPassword3" ng-model="model.Rating_value">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="">IsActive</label>
+                <input ng-checked="model.IsActive" type="checkbox" id="gridCheck1" ng-model="model.IsActive">
+                @*<label class="form-check-label" for="gridCheck1">
+                        IsActive
+                    </label>*@
+            </div>
+
+
+            <div class="form-group row">
+                <div class="col-sm-5">
+                    <button type="submit" class="btn btn-primary" ng-click="save()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

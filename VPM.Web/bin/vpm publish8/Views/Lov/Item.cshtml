@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Sub Category Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/Lov">Sub Category Master</a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+        <br />
+
+    </div>
+</div>
+<form ng-controller="Lov">
+       <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Category</label>
+        <div class="col-sm-3">
+            @*<input type="text" class="form-control" ng-model="model.CategotyId" validator="[required]">*@
+            <select ng-model="model.CategoryId" ng-options="item.ID as item.Name for item in lov_categories" class="form-control" validator="[requiredSelect]" required></select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Code</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" ng-model="model.Code" validator="[required]">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" ng-model="model.Name" validator="[required]">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-sm-2">IsActive</div>
+        <div class="col-sm-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" ng-checked="model.Isactive" ng-model="model.Isactive">
+                @*<label class="form-check-label" for="gridCheck1">
+                        IsActive
+                    </label>*@
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-5">
+            <button type="submit" class="btn btn-primary" ng-click="save()">Submit</button>
+            <button type="submit" class="btn btn-danger" ng-click="delete(model.Id)" id="Delete" name="Delete"  ng-show="model.Id>0">Delete</button>
+        </div>
+    </div>
+</form>
+
+

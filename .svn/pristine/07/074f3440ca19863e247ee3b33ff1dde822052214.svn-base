@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Cylsys.Common;
+using VPM.Web.Models;
+
+namespace VPM.Web.Controllers
+{
+    [CustomAuthorize]
+    public class LovController : Controller
+    {
+        public List<DDLModel> ListModel { get; private set; }
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Item()
+        {
+            return View();
+        }
+        public ActionResult EditItem()
+        {
+            return View();
+        }
+        public ActionResult GetCategoryTypes()
+        {
+
+            ListModel = new List<DDLModel>();
+            SqlParameter[] Params = { };
+            DataTable dt = CommonDB.GetRecord("vpm_sp_get_category_types", Params);
+            if (dt.Rows.Count > 0)
+            {
+                ListModel = CommonDB.LOAD_DROPDOWNLIST(dt);
+            }
+            return Json(ListModel);
+        }
+
+        [HttpPost]
+        public ActionResult GetItem(int Id)
+        {
+            return Json(LovDB.GetItem(Id));
+        }
+
+        [HttpPost]
+        public JsonResult Save(LovModel model)
+        {
+            LovModel obj = new LovModel();
+            obj.ID = model.ID;
+            obj.CategoryId = model.CategoryId;
+            obj.Code = model.Code;
+            obj.Name = model.Name;
+            obj.Isactive = model.Isactive;
+            return Json(LovDB.Save(obj));
+        }
+
+        [HttpPost]
+        public JsonResult GetLovGrid()
+        {
+            return Json(LovDB.GetLovGrid());
+        }
+        public ActionResult DeleteItem(int Id)
+        {
+            return Json(LovDB.DeleteItem(Id));
+        }
+
+    }
+}

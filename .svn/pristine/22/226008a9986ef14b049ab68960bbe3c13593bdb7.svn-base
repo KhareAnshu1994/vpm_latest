@@ -1,0 +1,577 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using VPM.Web.Models;
+
+namespace VPM.Web.Models
+{
+    public class VPMModels
+    {
+    }
+    //public class LovCategoryModel
+    //{
+    //    public int Id { get; set; }
+    //    public string Code { get; set; }
+    //    public string Name { get; set; }
+    //    public bool IsActive { get; set; }
+    //    public DateTime Created_Date { get; set; }
+    //}
+
+    //public class LovModel
+    //{
+    //    public int Id { get; set; }
+    //    public int CategoryId { get; set; }
+    //    public string Category_Code { get; set; }
+    //    public string Code { get; set; }
+    //    public string Name { get; set; }
+    //    public bool IsActive { get; set; }
+    //    public DateTime Created_date { get; set; }
+
+    //}
+
+    //public class DDLModel
+    //{
+    //    public int ID { get; set; }
+    //    public string Name { get; set; }
+    //}
+
+
+
+    //public class MessageHelper
+    //{
+    //    public static string Logout
+    //    {
+    //        get
+    //        {
+    //            return "Logout suggesfully.";
+    //        }
+    //    }
+    //    public static string ValidCredentials
+    //    {
+    //        get
+    //        {
+    //            return "Login suggesfully.";
+    //        }
+    //    }
+    //    public static string InvalidCredentials
+    //    {
+    //        get
+    //        {
+    //            return "Invalid User & Password.";
+    //        }
+    //    }
+
+    //    public static string DeleteRecord
+    //    {
+    //        get
+    //        {
+    //            return "Record Deleted Successfully !";
+    //        }
+    //    }
+    //    public static string Success
+    //    {
+    //        get
+    //        {
+    //            return "Data Save Successfully !";
+    //        }
+    //    }
+    //    public static string Fail
+    //    {
+    //        get
+    //        {
+    //            return "Fail";
+    //        }
+    //    }
+    //    public static string IdNotValid
+    //    {
+    //        get
+    //        {
+    //            return "Id Not Valid";
+    //        }
+    //    }
+    //    public static string DuplicateRecord
+    //    {
+    //        get
+    //        {
+    //            return "Record Already Present !";
+    //        }
+    //    }
+    //    public static string Already_Updated_Record
+    //    {
+    //        get
+    //        {
+    //            return "Record is already updated !";
+    //        }
+    //    }
+    //    public static string Exists_Sub_Record
+    //    {
+    //        get
+    //        {
+    //            return "Category have its Sub Category please delete sub Category First!";
+    //        }
+    //    }
+
+    //    public static string Internal_DB_Error
+    //    {
+    //        get
+    //        {
+    //            return "Internal_DB_Error";
+    //        }
+    //    }
+    //}
+    //public class UserModel
+    //{
+    //    public int? Id { get; set; }
+
+    //    [DisplayName("Name")]
+    //    public string Name { get; set; }
+    //    [DisplayName("User Name")]
+    //    [Required(ErrorMessage = "*")]
+    //    public string UserName { get; set; }
+    //    [DisplayName("Password")]
+    //    [Required(ErrorMessage = "*")]
+    //    public string Password { get; set; }
+    //    [DisplayName("IsUserActive")]
+    //    public bool IsUserActive { get; set; }
+    //}
+
+    public class DDLTaxRateModel
+    {
+        public decimal TaxPercentage { get; set; }
+    }
+    public class PartyMasterModel
+    {
+        public int? Id { get; set; }
+        [DisplayName("PartyName")]
+        [Required(ErrorMessage = "*")]
+        public string PartyName { get; set; }
+        [DisplayName("Location")]
+        [Required(ErrorMessage = "*")]
+        public string Location { get; set; }
+        [DisplayName("Address1")]
+        [Required(ErrorMessage = "*")]
+        public string Address1 { get; set; }
+
+        [DisplayName("Address2")]
+        [Required(ErrorMessage = "*")]
+        public string Address2 { get; set; }
+
+        [DisplayName("Address3")]
+        [Required(ErrorMessage = "*")]
+        public string Address3 { get; set; }
+
+        [DisplayName("State")]
+        [Required(ErrorMessage = "*")]
+        public string State { get; set; }
+
+        
+        [Required(ErrorMessage = "*")]
+        public string Pincode { get; set; }
+
+
+        [DisplayName("BankName")]
+        [Required(ErrorMessage = "*")]
+
+        public int? BankId { get; set; }
+        [DisplayName("IFSCCODE")]
+        [Required(ErrorMessage = "*")]
+        public string IFSCCODE { get; set; }
+        [DisplayName("AccountNO")]
+        [Required(ErrorMessage = "*")]
+        public string AccountNo { get; set; }
+        [DisplayName("GSTNO")]
+        [Required(ErrorMessage = "*")]
+        public string GSTNO { get; set; }
+
+        [Required(ErrorMessage = "*")]
+        public string PANNO { get; set; }
+
+        [DisplayName("Remark")]
+        public string Remark { get; set; }
+        [DisplayName("IsPartyActive")]
+        [Required(ErrorMessage = "*")]
+        public bool IsActive { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string BankName { get; set; }
+    }
+
+    public class PartyPaymentModel
+    {
+        public int? Id { get; set; }
+
+        public string ETYPE { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayName("Inword Date")]
+        public DateTime InwardDate { get; set; }
+        public string Department { get; set; }
+        [DisplayName("Party Name")]
+        public int PartyId { get; set; }
+
+        [DisplayName("Party Address")]
+        public string PartyAddress { get; set; }
+
+        [DisplayName("PANNO")]
+        public string PANNO { get; set; }
+
+        [DisplayName("GSTRNo")]
+        public string GSTRNo { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime PVDate { get; set; }
+        public string PVNO { get; set; }
+        [DisplayName("Voucher Type")]
+        public int VoucherTypeId { get; set; }
+        [DisplayName("PK")]
+        public string PK { get; set; }
+        [DisplayName("Sch Code")]
+        public string SchCode { get; set; }
+        [DisplayName("GL Code")]
+        public string GLCode { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime BillDate { get; set; }
+        public string BillNo { get; set; }
+
+        [DisplayName("Bill AMT")]
+        public decimal? BillAmount { get; set; }
+        public string GLCODE_SGST { get; set; }
+        public decimal SGSTRate { get; set; }
+        public string GLCODE_CGST { get; set; }
+        public decimal CGSTRate { get; set; }
+
+        public string GLCODE_IGST { get; set; }
+        public decimal IGSTRate { get; set; }
+        
+        public decimal TotalBill { get; set; }
+
+        public string GLCODE_INCOMETAX { get; set; }
+        public decimal IncomeTaxRate { get; set; }
+        public string GLCODE_TDSUnderSGST { get; set; }
+        public decimal TDSUnderSGSTRate { get; set; }
+        public string GLCODE_TDSUnderCGST { get; set; }
+        public decimal TDSUnderCGSTRate { get; set; }
+        public string GLCODE_TDSUnderIGST { get; set; }
+        public decimal TDSUnderIGSTRate { get; set; }
+        public string GLCODE_BANK_NETAMOUNT { get; set; }
+        public decimal NetAmount { get; set; }
+        [DisplayName("Payable At")]
+        public int PayableAtId { get; set; }
+        public string PayableAtNumber { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? PayableAtDate { get; set; }
+        [DisplayName("HSN Code")]
+        public string HSNCode { get; set; }
+        public string CreatedBy { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime CreatedDate { get; set; }
+
+       [NotMapped]
+        public string PayableAt { get; set; }
+        [NotMapped]
+        public string PartyName { get; set; }
+        [NotMapped]
+        public string Department_PVNo_SNo { get; set; }
+        [NotMapped]
+        public string VoucherType { get; set; }
+        [NotMapped]
+        public decimal SGST { get; set; }
+        [NotMapped]
+        public decimal CGST { get; set; }
+        [NotMapped]
+        public decimal IGST { get; set; }
+        [NotMapped]
+        public decimal Total { get; set; }
+        [NotMapped]
+        public decimal IncomeTax { get; set; }
+        [NotMapped]
+        public decimal TDSUnderSGST { get; set; }
+        [NotMapped]
+        public decimal TDSUnderCGST { get; set; }
+        [NotMapped]
+        public decimal TDSUnderIGST { get; set; }
+        [NotMapped]
+        public decimal Surcharge { get; set; }
+        [NotMapped]
+        public decimal CES { get; set; }
+
+
+
+    }
+
+
+
+    public class TaxModel
+    {
+        public int Id { get; set; }
+        [Required(ErrorMessage = "*")]
+        public string TaxName { get; set; }
+    }
+
+    public class TaxationModel
+    {
+        public int Id { get; set; }
+
+        [DisplayName("Tax Name")]
+        [Required(ErrorMessage = "*")]
+
+        public int TaxId { get; set; }
+        public string TaxName { get; set; }
+
+        [DisplayName("Percentage")]
+        [Required(ErrorMessage = "*")]
+        public decimal TaxPercentage { get; set; }
+
+        [DisplayName("Remark")]
+        [Required(ErrorMessage = "*")]
+        public string Remark { get; set; }
+        public string Createdby { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int? Modifiedby { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public string Status { get; set; }
+    }
+
+    public class SapVoucherReportModel
+    {
+        public DateTime? InwardDate { get; set; }
+        public int VoucherNo { get; set; }
+        public  DateTime? VoucherDate { get; set; }
+        public string SchCode { get; set; }
+        public DateTime? PostDate { get; set; }
+        public string VoucherType { get; set; }
+        public string BillNo { get; set; }
+        public string Department { get; set; }
+        public string PK { get; set; }
+        public string SapCode { get; set; }
+        public string CONTRASCH { get; set; }
+        public decimal BillAmount { get; set; }
+        public string BA { get; set; }
+        public DateTime? ValueDate { get; set; }
+        public string Naration { get; set; }
+    }
+
+
+    public class BankLetterReportModel
+    {
+        public int Id { get; set; }
+        public int PartyId { get; set; }
+        public string PartyName { get; set; }
+        public int PayableAtId { get; set; }
+        public string PayableAt { get; set; }
+        public decimal NetAmount { get; set; }
+    }
+
+    public class ChqIssuedReportModel
+    {
+
+        public int Id { get; set; }
+        public int PartyId { get; set; }
+        public string PartyName { get; set; }
+        public string Department { get; set; }
+        public string PayableAtNumber { get; set; }
+        public decimal NetAmount { get; set; }
+        public DateTime? PayableAtDate { get; set; }
+
+
+       
+    }
+
+    public class TDSDepositedReportModel
+    {
+        public int Id { get; set; }
+        public int PartyId { get; set; }
+        public string PartyName { get; set; }
+        public decimal BillAmount { get; set; }
+        public string GLCODE_INCOMETAX { get; set; }
+        public decimal IncomeTaxRate { get; set; }
+        public decimal IncomeTax { get; set; }
+        public decimal Surcharge { get; set; }
+        public decimal CES { get; set; }
+        public decimal Total { get; set; }
+    }
+
+    public class TDSUnderGSTReportModel
+    {
+        public int Id { get; set; }
+        public string GSTRNo { get; set; }
+        public int PartyId { get; set; }
+        public string PartyName { get; set; }
+        public decimal BillAmount { get; set; }
+        public string GLCODE_TDSUnderSGST { get; set; }
+        public decimal TDSUnderSGSTRate { get; set; }
+        public decimal TDSUnderSGST { get; set; }
+        public string GLCODE_TDSUnderCGST { get; set; }
+        public decimal TDSUnderCGSTRate { get; set; }
+        public decimal TDSUnderCGST { get; set; }
+        public string GLCODE_TDSUnderIGST { get; set; }
+        public decimal TDSUnderIGSTRate { get; set; }
+        public decimal TDSUnderIGST { get; set; }
+        public string HSNCode { get; set; }
+    }
+
+    public class GSTPaymentReportModel
+    {
+        public int Id { get; set; }
+        public string GSTRNo { get; set; }
+        public int PartyId { get; set; }
+        public string PartyName { get; set; }
+        public decimal BillAmount { get; set; }
+        public string GLCODE_SGST { get; set; }
+        public decimal SGSTRate { get; set; }
+        public decimal SGST { get; set; }
+        public string GLCODE_CGST { get; set; }
+        public decimal CGSTRate { get; set; }
+        public decimal CGST { get; set; }
+        public string GLCODE_IGST { get; set; }
+        public decimal IGSTRate { get; set; }
+        public decimal IGST { get; set; }
+        public string HSNCode { get; set; }
+    }
+
+    public class ETDSFillingReportModel
+    {
+        public int Id { get; set; }
+        public string Department { get; set; }
+        public DateTime InwardDate { get; set; }
+        public decimal BillAmount { get; set; }
+        public string GLCODE_INCOMETAX { get; set; }
+        public decimal IncomeTaxRate { get; set; }
+        public decimal IncomeTax { get; set; }
+        public int PartyId { get; set; }
+        public string PartyName { get; set; }
+        public string PartyAddress { get; set; }
+        public string PANNO { get; set; }
+    }
+
+
+    public class PartyPaymentMultipleSchemeModel
+    {
+        public int? Id { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayName("Inword Date")]
+        public DateTime InwardDate { get; set; }
+        public string Department { get; set; }
+        [DisplayName("Party Name")]
+        public int PartyId { get; set; }
+
+        [DisplayName("Party Address")]
+        public string PartyAddress { get; set; }
+
+        [DisplayName("PANNO")]
+        public string PANNO { get; set; }
+
+        [DisplayName("GSTRNo")]
+        public string GSTRNo { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime PVDate { get; set; }
+        public string PVNO { get; set; }
+        [DisplayName("Voucher Type")]
+        public int VoucherTypeId { get; set; }
+        [DisplayName("PK")]
+        public string PK { get; set; }
+      
+        [DataType(DataType.Date)]
+        public DateTime BillDate { get; set; }
+        public string BillNo { get; set; }
+        public decimal? NetBillAmount { get; set; }
+        public decimal NetTotalBill { get; set; }
+        public string GLCODE_INCOMETAX { get; set; }
+        public decimal IncomeTaxRate { get; set; }
+        public string GLCODE_TDSUnderSGST { get; set; }
+        public decimal TDSUnderSGSTRate { get; set; }
+        public string GLCODE_TDSUnderCGST { get; set; }
+        public decimal TDSUnderCGSTRate { get; set; }
+        public string GLCODE_TDSUnderIGST { get; set; }
+        public decimal TDSUnderIGSTRate { get; set; }
+        public string GLCODE_BANK_NETAMOUNT { get; set; }
+        public decimal NetAmount { get; set; }
+        [DisplayName("Payable At")]
+        public int PayableAtId { get; set; }
+        public string PayableAtNumber { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? PayableAtDate { get; set; }
+        [DisplayName("HSN Code")]
+        public string HSNCode { get; set; }
+        public string CreatedBy { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime CreatedDate { get; set; }
+
+        [NotMapped]
+        public string PayableAt { get; set; }
+        [NotMapped]
+        public string PartyName { get; set; }
+        [NotMapped]
+        public string Department_PVNo_SNo { get; set; }
+        [NotMapped]
+        public string VoucherType { get; set; }
+        [NotMapped]
+        public decimal SGST { get; set; }
+        [NotMapped]
+        public decimal CGST { get; set; }
+        [NotMapped]
+        public decimal IGST { get; set; }
+        [NotMapped]
+        public decimal Total { get; set; }
+        [NotMapped]
+        public decimal IncomeTax { get; set; }
+        [NotMapped]
+        public decimal TDSUnderSGST { get; set; }
+        [NotMapped]
+        public decimal TDSUnderCGST { get; set; }
+        [NotMapped]
+        public decimal TDSUnderIGST { get; set; }
+        [NotMapped]
+        public decimal Surcharge { get; set; }
+        [NotMapped]
+        public decimal CES { get; set; }
+
+
+
+    }
+
+
+    public class PaymentMultipleSchemeModel
+    {
+        public int? Id { get; set; }
+        public string BillNo { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime BillDate { get; set; }
+        public string SchCode { get; set; }
+       public string GLCode { get; set; }
+        public decimal? BillAmount { get; set; }
+        public string GLCODE_SGST { get; set; }
+        public decimal SGSTRate { get; set; }
+        public string GLCODE_CGST { get; set; }
+        public decimal CGSTRate { get; set; }
+
+        public string GLCODE_IGST { get; set; }
+        public decimal IGSTRate { get; set; }
+        public decimal TotalBill { get; set; }
+
+        public decimal SGST { get; set; }
+        [NotMapped]
+        public decimal CGST { get; set; }
+        [NotMapped]
+        public decimal IGST { get; set; }
+        [NotMapped]
+        public decimal Total { get; set; }
+
+        [NotMapped]
+        public decimal NetBillAmount { get; set; }
+
+        [NotMapped]
+        public decimal NetTotalBill { get; set; }
+
+
+    }
+
+}

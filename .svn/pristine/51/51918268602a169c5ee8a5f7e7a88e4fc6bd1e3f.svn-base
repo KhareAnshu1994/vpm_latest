@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "SAP Voucher Report";
+}
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<div class="container-fluid body-content" ng-controller="SAPVoucherReport">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link text-dark" href="javascript:void(0);"><strong>SAP Voucher Report</strong></a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <form>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">From Date</label>
+                        <input type="date" class="form-control" id="fromDate" ng-model="fromDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">To Date</label>
+                        <input type="date" class="form-control" id="toDate" ng-model="toDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Payable At</label>
+                        <select ng-model="PayableAt" id="payableat" ng-options="item.ID as item.Name for item in lst_PayableAt" class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-3 mt-4">
+                        <button type="submit" class="btn btn-primary mt-2" ng-click="Search(fromDate,toDate)">
+                            <span ng-show="searchButtonText == 'Searching'">
+                                <img style="width:20px;height:20px;" src="~/images/loader.gif" />
+                            </span>
+                            {{ searchButtonText }}
+                        </button>
+                    </div>
+                    @* <a href="/Reports/DownloadSAPVOUCHERExcel/{{temp_from_date}}/{{temp_to_date}}" class="btn btn-primary"> Download</a>*@
+                    <div class="form-group col-md-3 mt-4">
+                        <button type="button" class="btn btn-primary" id="exportSubmit">Download </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <form id="exportData" action="/Reports/DownloadSAPVOUCHERExcel" style="display:none">
+        <input type="text" value="" name="FromDate" />
+        <input type="text" value="" name="ToDate" />
+        <input type="text" value="" name="PayableAt" />
+    </form>
+    <div class="row">
+        <div class="col-md-12" style="overflow-x:scroll;">
+            <table class="table table-hover table-bordered" id="table_id">
+                <thead>
+                    <tr style="background-color:darkgrey">
+                        @*<th scope="col">Inward Date</th>*@
+                        <th scope="col">VoucherNo</th>
+                        <th scope="col">VoucherDate</th>
+                        <th scope="col">SchemeCode</th>
+                        <th scope="col">PostDT</th>
+                        <th scope="col">VoucherType</th>
+                        <th scope="col">BillNo</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">PK</th>
+                        <th scope="col">SAPCode</th>
+                        <th scope="col">CONTRASCH</th>
+                        <th scope="col">BillAmount</th>
+                        <th scope="col">BA</th>
+                        <th scope="col">ValueDT</th>
+                        <th scope="col" style="width:100%;">Naration</th>
+
+                        @*<th scope="col">
+                            <label for="" ng-if="PayableAt==5">NEFT Number</label>
+                            <label for="" ng-if="PayableAt==6">RTGS Number</label>
+                            <label for="" ng-if="PayableAt==7">Cheque Number</label>
+                            <label for="" ng-if="PayableAt==8">Direct Deposit </label>
+                            </th>*@
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:right">Total:</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            //$("#myTableId").dataTable();
+            //$("#myTableId2").dataTable();
+
+
+            $("#exportSubmit").click(function () {
+                debugger;
+
+                var FromDate = $("#fromDate").val();
+                var ToDate = $("#toDate").val();
+                var payableat = $("#payableat option:selected").text();
+
+                $("#exportData input[name=FromDate]").val(FromDate);
+                $("#exportData input[name=ToDate]").val(ToDate);
+                $("#exportData input[name=PayableAt]").val(payableat);
+
+                $("#exportData").submit();
+            })
+        })
+
+    </script>
+
+</div>
+
+
+
+

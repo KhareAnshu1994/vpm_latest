@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "Vendor Payment";
+}
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/PartyPayment">Vendor Payment</a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+    </div>
+</div>
+<div class="container-fluid body-content" ng-controller="PartyPaymentController">
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="form-row mt-4">
+                    @*<div class="form-group col-md-3">
+        <label for="">Sr No.</label>
+         <input type="text" class="form-control disabled" id="" placeholder="9">
+         </div>*@
+                    <div class="form-group col-md-3">
+                        <label for="">Entry TYPE</label>
+                        @*<select ng-model="model.ETYPE" ng-options="item.ID as item.Name for item in lst_EntryType"
+                                class="form-control"></select>*@
+
+                        <select ng-model="model.ETYPE" class="form-control">
+                            
+                            <option ng-repeat="item in lst_EntryType" value="{{item.Name}}">{{item.Name}}</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Inward Date</label>
+                        <input type="date" class="form-control" id="" placeholder="Inward Date" ng-model="model.InwardDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Department</label>
+                        <input type="text" class="form-control" id="" placeholder="Department" ng-model="model.Department">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Vendor Name</label>
+                        <select data-ng-model="model.PartyId" data-ng-options="item.ID as item.Name for item in lst_PartyNames" data-ng-change="GetVenderDetails()"
+                                class="form-control" validator="[requiredSelect]" required></select>
+                    </div>
+
+                </div>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">Vendor Address</label>
+                        <textarea type="text" class="form-control" id="" rows="1" ng-model="model.PartyAddress" readonly></textarea>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Pan No</label>
+                        <input type="text" class="form-control" id="" placeholder="Pan No" ng-model="model.PANNO">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">GSTR No</label>
+                        <input type="text" class="form-control" id="" ng-model="model.GSTRNo">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Pv No</label>
+                        <input type="text" class="form-control" id="" placeholder="Pv No" ng-model="model.PVNO">
+                    </div>
+                  </div>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">PV Date</label>
+                        <input type="date" class="form-control" id="" placeholder="PV Date" ng-model="model.PVDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Voucher Type</label>
+                        <select ng-model="model.VoucherTypeId" ng-options="item.ID as item.Name for item in lst_VoucherTypes"
+                                class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">PK</label>
+                        <input type="text" class="form-control" id="" placeholder="PK" ng-model="model.PK">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Sch Code</label>
+                        <input type="text" class="form-control" id="" placeholder="Sch Code" ng-model="model.SchCode">
+                    </div>
+
+
+                </div>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">Bill No</label>
+                        <input type="text" class="form-control" id="" placeholder="Bill No" ng-model="model.BillNo">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Bill Date</label>
+                        <input type="date" class="form-control" id="" placeholder="Bill Date" ng-model="model.BillDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">GL Code</label>
+                        <input type="text" class="form-control" id="" placeholder="GL Code" ng-model="model.GLCode">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Bill Amount</label>
+                        <input type="text" class="form-control" id="" placeholder="Bill AMT" ng-model="model.BillAmount" ng-change="CalculationBillandNetAmount()">
+                    </div>
+
+
+                </div>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">GL CODE for SGST </label>
+                        <input type="text" class="form-control" id="" placeholder="GL CODE SGST" ng-model="model.GLCODE_SGST">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">SGST Rate</label>
+                        <select ng-model="model.SGSTRate" ng-options="item.TaxPercentage as item.TaxPercentage for item in lst_SGST_Rates"
+                                ng-change="CalculateTotalBill()"
+                                class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">GL CODE for CGST </label>
+                        <input type="text" class="form-control" id="" placeholder="GL CODE CGST" ng-model="model.GLCODE_CGST">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="">CGST Rate</label>
+                        <select ng-model="model.CGSTRate" ng-options="item.TaxPercentage as item.TaxPercentage for item in lst_CGST_Rates"
+                                ng-change="CalculateTotalBill()" class="form-control"></select>
+                    </div>
+                </div>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">GL CODE for IGST </label>
+                        <input type="text" class="form-control" id="" placeholder="GL CODE IGST" ng-model="model.GLCODE_IGST">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">IGST Rate</label>
+                        <select ng-model="model.IGSTRate" ng-options="item.TaxPercentage as item.TaxPercentage for item in lst_IGST_Rates"
+                                ng-change="CalculateTotalBill()" class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Total Bill</label>
+                        <input type="text" class="form-control" id="" placeholder="Total Bill" ng-model="model.TotalBill" readonly>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="">GL CODE for Income Tax </label>
+                        <input type="text" class="form-control" id="" placeholder="GLCODE INCOME TAX" ng-model="model.GLCODE_INCOMETAX">
+                    </div>
+                </div>
+
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">Income Tax Rate</label>
+                        <select ng-model="model.IncomeTaxRate" ng-options="item.TaxPercentage as item.TaxPercentage for item in lst_Income_Tax_Rates"
+                                ng-change="CalculateNetAmount()" class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">GL CODE for TDS Under SGST </label>
+                        <input type="text" class="form-control" id="" placeholder="GLCODE TDS Under SGST" ng-model="model.GLCODE_TDSUnderSGST" ng-init="GLCODE_TDSUnderSGST='7060087'">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="">TDS under SGST Rate</label>
+                        <select ng-model="model.TDSUnderSGSTRate" ng-options="item.TaxPercentage as item.TaxPercentage for item in lst_TDS_under_SGST_Rates"
+                                ng-change="CalculateNetAmount()" class="form-control"></select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="">GL CODE for TDS Under CGST </label>
+                        <input type="text" class="form-control" id="" ng-model="model.GLCODE_TDSUnderCGST" ng-init="GLCODE_TDSUnderCGST='7060088'">
+                    </div>
+                </div>
+
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">TDS Under CGST Rate</label>
+                        <select ng-model="model.TDSUnderCGSTRate" ng-options="item.TaxPercentage as item.TaxPercentage for item in lst_TDS_Under_CGST_Rates"
+                                ng-change="CalculateNetAmount()" class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">GL CODE for TDS Under IGST </label>
+                        <input type="text" class="form-control" id="" ng-model="model.GLCODE_TDSUnderIGST">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="">TDS Under IGST Rate</label>
+                        <select ng-model="model.TDSUnderIGSTRate" ng-options="item.TaxPercentage as item.TaxPercentage for item in lst_TDS_Under_IGST_Rates"
+                                ng-change="CalculateNetAmount()" class="form-control"></select>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="">GL CODE BANK NETAMOUNT </label>
+                        <input type="text" class="form-control" id="" placeholder="GLCODE BANK NET AMOUNT" ng-model="model.GLCODE_BANK_NETAMOUNT">
+                    </div>
+
+                  
+                </div>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">Net Amount</label>
+                        <input type="text" class="form-control" id="" placeholder="Net AMT" ng-model="model.NetAmount" readonly>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="">Payable At</label>
+                        <select ng-model="model.PayableAtId" ng-options="item.ID as item.Name for item in lst_PayableAt"
+                                class="form-control"></select>
+                    </div>
+                    <div class="form-group col-md-3" ng-if="model.PayableAtId==5 ||model.PayableAtId==6 || model.PayableAtId==7 ">
+                        <label for="" ng-if="model.PayableAtId==5">NEFT Number</label>
+                        <label for="" ng-if="model.PayableAtId==6">RTGS Number</label>
+                        <label for="" ng-if="model.PayableAtId==7">Cheque Number</label>
+                        <input type="text" class="form-control mt-1" id="" ng-model="model.PayableAtNumber">
+                    </div>
+                    <div class="form-group col-md-2" ng-if="model.PayableAtId==5 ||model.PayableAtId==6 || model.PayableAtId==7 || model.PayableAtId==8">
+                        <label for="" ng-if="model.PayableAtId==5">NEFT Date</label>
+                        <label for="" ng-if="model.PayableAtId==6">RTGS Date</label>
+                        <label for="" ng-if="model.PayableAtId==7">Cheque Date</label>
+                        <label for="" ng-if="model.PayableAtId==8">Direct Deposit Date</label>
+                        <input type="Date" class="form-control mt-1" id="" ng-model="model.PayableAtDate">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="">HSN Code</label>
+                        <input type="text" class="form-control" id="" placeholder="HSN Code" ng-model="model.HSNCode">
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    
+                    <div class="col-md-12 mt-1">
+                        <button type="submit" class="btn btn-primary" ng-click="Save()">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

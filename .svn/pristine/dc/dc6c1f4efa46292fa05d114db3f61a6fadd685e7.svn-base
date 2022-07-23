@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Order Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+@*<link href="~/Content/multiSelect2.css" rel="stylesheet" />
+    <script src="~/Assets/mutliSelect21.js"></script>
+    <script src="~/Assets/anglr.js"></script>
+    <script src="~/Assets/multiSelect2.js"></script>*@
+<style>
+    /*.ng-invalid {
+        border: 1px solid red;
+    }*/
+    .has-error .ng-invalid {
+        border: 1px solid red;
+    }
+
+
+</style>
+<div class="col-md-12 p-0">
+    <ul class="nav">
+        <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="/OrderManagement">Order Management</a> </li>
+    </ul>
+    <hr class="m-0">
+</div>
+
+<br />
+<form ng-controller="OrderManagement">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label>System Date</label>
+            <input type="date" class="form-control" ng-model="model.system_date">
+        </div>
+        <div class="form-group col-md-3">
+            <label>System Time</label>
+            <input type="time" class="form-control" ng-model="model.system_time">
+        </div>
+
+        <div class="form-group col-md-3">
+            <label>Security Name</label>
+            <input type="text" class="form-control" ng-model="model.security_name" validator="[required]" required />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+
+            <label>Scheme Name*</label>
+            
+            <select select2 multiple ng-model="model.scheme_list" ng-options="item.ID as item.Name for item in scheme_names" class="form-control col-md-12" validator="[requiredSelect]" required></select>
+            @* <select ng-model="model.scheme_id" ng-options="item.ID as item.Name for item in scheme_names" class="form-control"></select>*@
+
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label>Security Type</label>
+            <select ng-model="model.security_type_id" ng-options="item.ID as item.Name for item in security_types" class="form-control" validator="[requiredSelect]" required></select>
+        </div>
+        <div class="form-group col-md-3" ng-show="model.security_type_id===5">
+            <label>Other Security Type</label>
+            <input type="text" class="form-control" ng-model="model.other_security_type" />
+        </div>
+        <div class="form-group col-md-3">
+            <label>Toggle</label>
+            <select ng-model="model.toggle_id" ng-options="item.ID as item.Name for item in toggles" class="form-control" validator="[requiredSelect]" required></select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label>Amount in Crores</label>
+            <input type="text" class="form-control" ng-model="model.amount" validator="[required]" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required/>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Price/Yield</label>
+            <select ng-model="model.price_yield_id" ng-options="item.ID as item.Name for item in priceyields" class="form-control" validator="[requiredSelect]" required></select>
+        </div>
+        <div class="form-group col-md-3">
+            <label>Price(in rupees)/Yield(%)</label>
+            <input type="text" class="form-control" ng-model="model.price_yield" validator="[required]" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-5">
+            <button type="submit" class="btn btn-primary" ng-click="save()">Submit</button>
+        </div>
+    </div>
+</form>
+
+

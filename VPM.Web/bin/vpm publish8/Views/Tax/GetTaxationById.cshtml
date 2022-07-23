@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Taxation Master";
+}
+<div class="col-md-12 p-0">
+    <ul class="nav">
+        <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="/Tax">Taxation Master</a> </li>
+    </ul>
+    <hr class="m-0">
+</div>
+<br />
+<div class="container-fluid body-content" ng-controller="TaxController">
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+
+                <div class="form-row">
+                    <label class="col-sm-2 col-form-label">Tax Name</label>
+                    <div class="col-md-4">
+                        <select ng-model="model.TaxId" ng-options="item.ID as item.Name for item in lst_Taxes" class="form-control" validator="[requiredSelect]" required></select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label class="col-sm-2 col-form-label">TaxPercentage</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="" placeholder="Percentage" ng-model="model.TaxPercentage">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label class="col-sm-2 col-form-label">Remark</label>
+                    <div class="col-md-4">
+                        <textarea class="form-control" id="" placeholder="Remark" ng-model="model.Remark"> </textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-1">
+                        <button type="submit" class="btn btn-primary" ng-click="EditTaxation()" name="EditTaxation" id="EditTaxation">Submit</button>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <button type="submit" class="btn btn-danger" ng-click="DeleteTaxation(model.Id)" name="DeleteTaxation" id="DeleteTaxation">Delete</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>
+
+

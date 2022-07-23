@@ -1,0 +1,82 @@
+﻿using VPM.Web.DAL;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using VPM.Web.Models;
+using System.Net.Http;
+using System.Net;
+
+namespace VPM.Web.Controllers
+{
+    [CustomAuthorize]
+    public class ReportsController : Controller
+    {
+        public ActionResult SAP_Voucher_Report()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult SAP_Voucher_Report_Grid(DateTime? fromDate, DateTime? toDate,int? PayableAt)
+        {
+            return Json(ReportDB.GetSAPVoucherReport(fromDate, toDate,PayableAt));
+        }
+
+        public ActionResult Bank_Letter_Report()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult Bank_Letter_Repor_Grid(DateTime? fromDate, DateTime? toDate)
+        {
+            return Json(ReportDB.GetBankLetterReport(fromDate, toDate));
+        }
+
+        public ActionResult Cheque_Issued_Report()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult Cheque_Issued_ReportGrid(DateTime? fromDate, DateTime? toDate)
+        {
+            return Json(ReportDB.GetChqIssuedReport(fromDate, toDate));
+        }
+
+        public ActionResult TDS_Deposited_Report()
+        {
+            return View();
+        }
+        [HttpPost]
+        public JsonResult TDS_Deposited_ReportGrid(DateTime? fromDate, DateTime? toDate)
+        {
+            return Json(ReportDB.GetTDSDepositedReport(fromDate, toDate));
+        }
+        public ActionResult TDS_Under_GST_Report()
+        {
+            return View();
+        }
+        public JsonResult TDS_Under_GSTReportGrid(DateTime? fromDate, DateTime? toDate)
+        {
+            return Json(ReportDB.GetTDSUnderGSTReport(fromDate, toDate));
+        }
+        public ActionResult GST_Payment_Report()
+        {
+            return View();
+        }
+        public JsonResult GST_Payment_ReportGrid(DateTime? fromDate, DateTime? toDate)
+        {
+            return Json(ReportDB.GetGSTPaymentReport(fromDate, toDate));
+        }
+
+        public ActionResult ETDS_Filling_Report()
+        {
+            return View();
+        }
+        public JsonResult ETDS_Filling_ReportGrid(DateTime? fromDate, DateTime? toDate)
+        {
+            return Json(ReportDB.GetETDSFillingReport(fromDate, toDate));
+        }
+    }
+}

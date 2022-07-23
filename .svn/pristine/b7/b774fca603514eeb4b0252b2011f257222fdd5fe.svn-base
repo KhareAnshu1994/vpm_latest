@@ -1,0 +1,64 @@
+﻿using ClosedXML.Excel;
+using Cylsys.Common;
+using MicroORM;
+using VPM.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+
+namespace VPM.Web.Controllers
+{
+    [CustomAuthorize]
+    public class ReportController : Controller
+    {
+        // GET: Report
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult GetGridDetail(DateTime FROM_DATE, DateTime TO_DATE)
+        {
+            Report bll = new Report();
+
+            return new JsonNetResult(bll.GetGridDetail(FROM_DATE, TO_DATE));
+        }
+        public ActionResult GetExportToExcel(ExportParaModel epmodel)
+        {
+            Report bll = new Report();
+            string fileNM =  "OMS Report_"+epmodel.FromDate.ToString("dd_MMM_yyyy")+"_To_"+epmodel.ToDate.ToString("dd_MMM_yyyy");
+
+            SqlParameter[] parameters = {
+                new SqlParameter("@from_date",epmodel.FromDate),
+                new SqlParameter("@to_date",epmodel.ToDate)
+
+            };
+            DataTable DT = new DataTable("Grid");
+            DT = DataAccess.ExecuteProcedure("oms_sp_get_report_excel", parameters);
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                try
+                {
+                    wb.Worksheets.Add(DT, "sheet1");
+                }
+                catch (Exception exx)
+                {
+                    Helper.WriteLog("error export to excel :" + exx);
+                }
+                using (MemoryStream stream = new MemoryStream())
+                {
+
+                    wb.SaveAs(stream);
+
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileNM + ".xlsx");
+                    //return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileNm + ".xlsx");
+                }
+            }
+        }
+    }
+}

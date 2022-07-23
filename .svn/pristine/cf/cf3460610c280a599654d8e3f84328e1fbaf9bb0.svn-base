@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewBag.Title = "Vendor-Multi-Payment-Scheme-Index";
+}
+
+<div class="container-fluid body-content mt-0" ng-controller="PartyPaymentMultipleSchemeController">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/PartyPaymentMultipleScheme/Item/0">Vendor-Multi-Payment-Scheme</a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+    </div>
+    <div class="row mt-0">
+        <article class="col-md-12">
+            <div class="pt-3">
+                <div class="mb-4"> <a href="/PartyPaymentMultipleScheme/Item/0" class="btn btn-secondary float-right ml-1">+</a></div>
+            </div>
+        </article>
+    </div>
+
+    @*<div class="row">
+            <div class="col-md-12 mt-0">
+                <form>
+                    <div class="form-row mt-4">
+                        <div class="form-group col-md-3">
+                            <label for="">From Date</label>
+                            <input type="date" class="form-control" id="fromDate" ng-model="fromDate">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="">To Date</label>
+                            <input type="date" class="form-control" id="toDate"   ng-model="toDate">
+                        </div>
+                        <div class="form-group col-md-3 mt-4">
+                            <button type="submit" class="btn btn-primary" ng-click="Search(fromDate,toDate)">
+                                <span ng-show="searchButtonText == 'Searching'">
+                                    <img style="width:20px;height:20px;" src="~/images/loader.gif" />
+                                </span>
+                                {{ searchButtonText }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                    <a href="/PartyPayment/Item/0" class="btn btn-primary float-right ml-2">+</a>
+                    <select class="custom-select col-sm-2 float-right" id="inlineFormCustomSelect" onchange="location = this.options[this.selectedIndex].value;">
+                        <option selected="">Action</option>
+                        <option value=" ">Export to Excel</option>
+                        <option value=" ">Export in PDF</option>
+                    </select>
+            </div>
+        </div>*@
+    <div class="row">
+        <div class="col-md-12 mt-1 p-0">
+            <table class="table table-hover table-bordered" id="table_id">
+                <thead>
+                    <tr style="background-color:darkgrey">
+                        <th scope="col">Vendor Name</th>
+                        <th scope="col">Bill Date</th>
+                        <th scope="col">Net Bill Amount</th>
+                        <th scope="col">Net Total Bill</th>
+                        <th scope="col">Net Amount </th>
+
+                        <th scope="col">Action</th>
+
+                        @*<th scope="col">Branch</th>*@
+                        @*<th scope="col">Taxable </th>
+        <th scope="col">TaxCategory</th>
+        <th scope="col">TaxPercentage</th>*@
+                        @*<th scope="col">PaymentDate</th>
+        <th scope="col">UTR NO</th>*@
+                    </tr>
+                </thead>
+                <tbody></tbody>
+
+            </table>
+            <!-- <table class="table small border">
+               <tr class="bg-light">
+               <th scope="col">SR No.</th>
+               <th scope="col">Inward Date</th>
+               <th scope="col">Department</th>
+               <th scope="col">Party Name</th>
+               <th scope="col">Party Address</th>
+               <th scope="col">Pan No.</th>
+               <th scope="col">GSTR No.</th>
+               <th scope="col">Pv No./Date</th>
+               <th scope="col">Voucher Type</th>
+               <th scope="col">PK</th>
+               <th scope="col">Sch Code</th>
+               <th scope="col">GL Code</th>
+               <th scope="col">Bill No./Date</th>
+               <th scope="col">Bill AMT</th>
+               <th scope="col">SGST Rate</th>
+               <th scope="col">SGST</th>
+               <th scope="col">CGST Rate</th>
+               <th scope="col">CGST</th>
+               <th scope="col">IGST Rate</th>
+               <th scope="col">IGST</th>
+               <th scope="col">Total Bill</th>
+               <th scope="col">Income Tax Rate</th>
+               <th scope="col">Income Tax</th>
+               <th scope="col">TDS under SGST Rate</th>
+               <th scope="col">TDS Under SGST</th>
+               <th scope="col">TDS Under CGST Rate</th>
+               <th scope="col">TDS Under CGST</th>
+               <th scope="col">TDS Under IGST Rate</th>
+               <th scope="col">TDS Under IGST</th>
+               <th scope="col">Net AMT</th>
+               <th scope="col">Payable At</th>
+               <th scope="col">HSN Code</th>
+               </tr>
+               <tr>
+                 <td>1</td>
+                 <td>24/10/2020</td>
+                 <td>Mumbai</td>
+                 <td>100 </td>
+                 <td>Mumbai</td>
+                 <td>9876543234</td>
+                 <td>343</td>
+                 <td>24/10/2020</td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td>5654</td>
+                 <td>9876543234</td>
+                 <td>24/10/2020</td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td>-</td>
+               </tr>
+               <tr>
+                 <td>2</td>
+                 <td>23/10/2020</td>
+                 <td>Delhi</td>
+                 <td>101 </td>
+                 <td>Delhi</td>
+                 <td>8876543234</td>
+                 <td>2543</td>
+                 <td>23/10/2020</td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td>7683</td>
+                 <td>8876543234</td>
+                 <td>23/10/2020</td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td>-</td>
+               </tr>
+               <tr>
+                 <td>3</td>
+                 <td>25/10/2020</td>
+                 <td>Mumbai</td>
+                 <td>102 </td>
+                 <td>Mumbai</td>
+                 <td>9776543234</td>
+                 <td>1843</td>
+                 <td>25/10/2020</td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td>8675</td>
+                 <td>9776543234</td>
+                 <td>25/10/2020</td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td> - </td>
+                 <td>-</td>
+               </tr>
+             </table>-->
+        </div>
+    </div>
+</div>

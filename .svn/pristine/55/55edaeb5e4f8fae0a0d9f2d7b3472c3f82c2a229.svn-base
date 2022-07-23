@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "SAP Voucher Report";
+}
+<div class="container-fluid body-content" ng-controller="SAPVoucherReport">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link text-dark" href="javascript:void(0);"><strong>SAP Voucher Report</strong></a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <form>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">From Date</label>
+                        <input type="date" class="form-control" id="fromDate" ng-model="fromDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">To Date</label>
+                        <input type="date" class="form-control" id="toDate" ng-model="toDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">Payable At</label>
+                        <select ng-model="PayableAt" ng-options="item.ID as item.Name for item in lst_PayableAt" ng-change="convertdateTostring(fromDate,toDate,PayableAt)"
+                                class="form-control" validator="[requiredSelect]" required></select>
+                    </div>
+                    <div class="form-group col-md-3 mt-4">
+                        <button type="submit" class="btn btn-primary" ng-click="Search(fromDate,toDate)">
+                            <span ng-show="searchButtonText == 'Searching'">
+                                <img style="width:20px;height:20px;" src="~/images/loader.gif" />
+                            </span>
+                            {{ searchButtonText }}
+                        </button>
+                    </div>
+                    <a href="/Reports/DownloadSAPVOUCHERExcel/{{temp_from_date}}/{{temp_to_date}}" class="btn btn-primary"> Download</a>
+
+                </div>
+            </form>
+            @*<hr>
+                <div class="p-2">
+                    <div class="">
+                        <select class="custom-select col-sm-2 float-right" id="inlineFormCustomSelect">
+                            <option selected="">Action</option>
+                            <option value="1">Export to Excel</option>
+                            <option value="2">Export to PDF</option>
+                            <option value="3">Export to Txt</option>
+                            <option value="4">Email</option>
+                        </select>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="overflow-x:scroll;">
+            <table class="table table-hover table-bordered" id="table_id">
+                <thead>
+                    <tr style="background-color:darkgrey">
+                        @*<th scope="col">Inward Date</th>*@
+                        <th scope="col">VoucherNo</th>
+                        <th scope="col">VoucherDate</th>
+                        <th scope="col">SchemeCode</th>
+                        <th scope="col">PostDT</th>
+                        <th scope="col">VoucherType</th>
+                        <th scope="col">BillNo</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">PK</th>
+                        <th scope="col">SAPCode</th>
+                        <th scope="col">CONTRASCH</th>
+                        <th scope="col">BillAmount</th>
+                        <th scope="col">BA</th>
+                        <th scope="col">ValueDT</th>
+                        <th scope="col" style="width:100%;">Naration</th>
+
+                        @*<th scope="col">
+                            <label for="" ng-if="PayableAt==5">NEFT Number</label>
+                            <label for="" ng-if="PayableAt==6">RTGS Number</label>
+                            <label for="" ng-if="PayableAt==7">Cheque Number</label>
+                            <label for="" ng-if="PayableAt==8">Direct Deposit </label>
+                            </th>*@
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:right">Total:</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+

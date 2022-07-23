@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "TDS Under GST";
+}
+<div class="container-fluid body-content" ng-controller="TDSUnderGSTReport">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>TDS Under GST</strong></a> </li>
+                </ul>
+            <hr class="m-0">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <form>
+                <div class="form-row mt-4">
+                    <div class="form-group col-md-3">
+                        <label for="">From Date</label>
+                        <input type="date" class="form-control" id="fromDate" ng-model="fromDate">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="">To Date</label>
+                        <input type="date" class="form-control" id="toDate" ng-model="toDate">
+                    </div>
+                    <div class="form-group col-md-3 mt-4">
+                        <button type="submit" class="btn btn-primary" ng-click="Search(fromDate,toDate)">
+                            <span ng-show="searchButtonText == 'Searching'">
+                                <img style="width:20px;height:20px;" src="~/images/loader.gif" />
+                            </span>
+                            {{ searchButtonText }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+            @*<hr>
+                <div class="p-2">
+                    <div class="">
+                        <select class="custom-select col-sm-2 float-right" id="inlineFormCustomSelect">
+                            <option selected="">Action</option>
+                            <option value="1">Export to Excel</option>
+                            <option value="2">Export to PDF</option>
+                            <option value="3">Email</option>
+                        </select>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 p-0 table-responsive">
+            <table class="table table-hover table-bordered" id="table_id">
+                <thead>
+                    <tr style="background-color:darkgrey">
+                        <th scope="col">SrNo</th>
+                        <th scope="col">GSTRNo.</th>
+                        <th scope="col">VendorName</th>
+                        <th scope="col">BillAmt</th>
+                        <th scope="col">GLCode-TDSUnderSGST</th>
+                        <th scope="col">TDS-Under-SGST-Rate</th>
+                        <th scope="col">TDS-Under-SGST</th>
+                        <th scope="col">GLCODE-TDSUnderCGST</th>
+                        <th scope="col">TDS-Under-CGST-Rate</th>
+                        <th scope="col">TDS-Under-CGST</th>
+                        <th scope="col">GLCODE-TDSUnderIGST</th>
+                        <th scope="col">TDS-Under-IGST Rate</th>
+                        <th scope="col">TDS-Under-IGST</th>
+                        <th scope="col">HSN-Code</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:right">Total:</th>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:right">Total:</th>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:right">Total:</th>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:right">Total:</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+

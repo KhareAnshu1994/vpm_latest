@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Report";
+}
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+<style>
+    .btn-primary {
+        color: #fff;
+        background-color: #383095;
+        border-color: #383095;
+    }
+
+
+    .box {
+        /*width: 150px;
+          height: 150px;*/
+        opacity: 0.9;
+        position: absolute;
+        top: 35px;
+        left: 30px;
+    }
+
+    .btnPosition {
+        margin-top: 26px;
+        margin-left: 0px;
+    }
+</style>
+<div class="col-md-12 p-0">
+    <ul class="nav">
+        <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">Report</a> </li>
+    </ul>
+    <hr class="m-0">
+</div>
+
+<br />
+<div ng-app="myApp" ng-controller="Report">
+    <div>
+        <form>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label>From Date</label>
+                    <input ng-model="FROM_DATE" id="FROM_DATE" type="date" class="form-control" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label>To Date</label>
+                    <input ng-model="TO_DATE" id="TO_DATE" type="date" class="form-control" />
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="submit" class="btn btn-primary mb-2 btnPosition" ng-click="GetGridRecord(FROM_DATE,TO_DATE)">
+                        <span ng-show="searchButtonText == 'Searching'">
+                            <img style="width:20px;height:20px;" src="~/images/loader.gif" />
+                        </span>
+                        {{ searchButtonText }}
+                    </button>
+                   
+                </div>
+                <div class="form-group col-md-2 btnPosition">
+                    <button type="button" class="btn btn-primary sm-2" id="exportSubmit" ng-show="report_grid_data.length>0">Download Excel</button>
+                </div>
+            </div>
+            <div class="row">
+
+
+            </div>
+        </form>
+    </div>
+    <br />
+    <form id="exportData" action="/Report/GetExportToExcel" style="display:none">
+        <input type="text" value="" name="FromDate" />
+        <input type="text" value="" name="ToDate" />
+    </form>
+    <div style="overflow:auto">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr style="background-color:darkgrey">
+                    <th>SrNo</th>
+                    <th>System_Date</th>
+                    <th>System_Time</th>
+                    <th>Scheme_Name</th>
+                    <th>Secuity_Type</th>
+                    <th>Security_Name</th>
+                    <th>Buy_And_Sale</th>
+                    <th>Amount</th>
+                    <th>Price_Or_Yield</th>
+                    <th>Created_By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in report_grid_data">
+                    <td>{{$index+1}}</td>
+                    <td>{{item.system_date | date:'dd-MMM-yyyy'}}</td>
+                    <td>{{item.system_time | date:"hh:mm"}}</td>
+                    <td>{{item.scheme_name}}</td>
+                    <td>{{item.security_type}}</td>
+                    <td>{{item.security_name}}</td>
+                    <td>{{item.toggle}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.price_yield}}</td>
+                    <td>{{item.created_by}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#exportSubmit").click(function () {
+
+            debugger;
+            var FromDate = $("#FROM_DATE").val();
+            var ToDate = $("#TO_DATE").val();
+
+            $("#exportData input[name=FromDate]").val(FromDate);
+            $("#exportData input[name=ToDate]").val(ToDate);
+            $("#exportData").submit();
+        })
+    });
+</script>

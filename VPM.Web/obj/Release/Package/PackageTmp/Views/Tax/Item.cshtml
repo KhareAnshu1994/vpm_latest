@@ -1,0 +1,98 @@
+﻿
+@{
+    ViewBag.Title = "Taxation Master";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/Tax">Taxation Master</a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+       </div>
+    </div>
+
+        <div class="container-fluid body-content" ng-controller="TaxController">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form name="TaxForm" id="TaxForm">
+                        <div class="form-row mt-4">
+                            <div class="form-group col-md-4">
+                                <label for="">Tax Name</label>
+                                <input type="text" class="form-control" id="" placeholder="Tax Name" ng-model="model.TaxName">
+                            </div>
+                            <div class="form-group col-md-4 mt-4">
+                                <button type="submit" class="btn btn-primary" ng-click="SaveTax()" name="SaveTax" id="SaveTax">Submit</button>
+                                @*<a href="taxation-master-view.html" class="btn btn-primary">Submit</a>*@
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form name="TaxationForm" id="TaxationForm">
+                        <div class="form-row mt-3">
+                            <div class="form-group col-md-3">
+                                <label for="">Tax Name</label>
+                                <select ng-model="model.TaxId" ng-options="item.ID as item.Name for item in lst_Taxes" class="form-control" validator="[requiredSelect]" required></select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="">TaxPercentage</label>
+                                <input type="text" class="form-control" id="" placeholder="Percentage" ng-model="model.TaxPercentage" validator="[required]" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="">Remark</label>
+                                <textarea class="form-control" id="" placeholder="Remark" ng-model="model.Remark" validator="[required]" required> </textarea>
+                            </div>
+                            <div class="form-group col-md-1">
+                                <br />
+                                <button type="submit" class="btn btn-primary" ng-click="SaveTempTaxation()" name="SaveTempTaxation" id="SaveTempTaxation">+</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr class="bg-light">
+                                <th>SrNo</th>
+                                <th>TaxName</th>
+                                <th>TaxPercentage</th>
+                                <th>Remark</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in tempTaxationrecords">
+                                <td>{{$index+1}}</td>
+                                <td>{{item.TaxName}}</td>
+                                <td>{{item.TaxPercentage}}</td>
+                                <td>{{item.Remark}} </td>
+                                <td>
+                                    <button type="submit" class="btn btn-danger" ng-click="DeleteTempTaxationRecord(item.Id)"
+                                            name="DeleteTempTaxationRecord" id="DeleteTempTaxationRecord">
+                                        -
+                                    </button>
+                                    @*<a href="/Lov/EditItem/{{item.Id}}"><b>X</b></a>*@
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-1">
+                    <form name="MTaxtionForm" id="MTaxtionForm">
+                        <button type="submit" class="btn btn-primary" ng-click="SaveTaxation()" name="SaveTaxation" id="SaveTaxation">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>

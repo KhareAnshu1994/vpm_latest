@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Vendor Master";
+}
+<div class="container-fluid body-content mt-0" ng-controller="PartyMasterController">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/PartyMaster/Item/0">Vendor Master</a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+    </div>
+    <div class="row mt-0">
+        <article class="col-md-12">
+            <div class="pt-3">
+                <div class="mb-2"> <a href="/PartyMaster/Item/0" class="btn btn-secondary float-right ml-1">+</a></div>
+            </div>
+        </article>
+        </div>
+        @*<h3>
+                Party Master View
+                <a href="/PartyMaster/Item" class="btn btn-primary float-right ml-2">+</a>
+                <select class="custom-select col-sm-2 float-right" id="inlineFormCustomSelect" onchange="location = this.options[this.selectedIndex].value;">
+                    <option selected="">Action</option>
+                    <option value=" ">Export to Excel</option>
+                    <option value=" ">Export in PDF</option>
+                </select>
+            </h3>*@
+<div class="row mt-2">
+    <div class="col-md-12 p-0">
+        <table class="table table-hover table-bordered d-sm-table-row" id="table_id">
+            <thead>
+                <tr style="background-color:darkgrey">
+                    @*<th scope="col">Action</th>*@
+                    <th scope="col">VendorName</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Address1</th>
+                    <th scope="col">Address2</th>
+                    <th scope="col">Address3</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Pincode</th>
+                    <th scope="col">BankName</th>
+                    <th scope="col">IFSCCode</th>
+                    <th scope="col">AccountNO</th>
+                    <th scope="col">GSTNO</th>
+                    <th scope="col">PANNO</th>
+                    <th scope="col">Remark</th>
+                    <th scope="col">IsActive</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>

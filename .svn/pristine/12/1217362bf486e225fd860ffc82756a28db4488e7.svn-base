@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Scheme Master";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12 p-0">
+    <ul class="nav">
+        <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="/Scheme">Scheme Master</a> </li>
+    </ul>
+    <hr class="m-0">
+</div>
+
+<br />
+<form ng-controller="Scheme">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Scheme Code</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" ng-model="model.Code" validator="[required]" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-3">
+            <input type="text" class="form-control" ng-model="model.Name" validator="[required]" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-2">IsActive</div>
+        <div class="col-sm-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" ng-checked="model.IsActive" ng-model="model.IsActive">
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-5">
+            <button type="submit" class="btn btn-primary" ng-click="save()">Submit</button>
+        </div>
+    </div>
+</form>
+
+

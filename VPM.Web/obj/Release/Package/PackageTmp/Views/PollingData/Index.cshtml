@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "OMS Data";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-2.2.3.min.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<style>
+    label {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        text-align: center;
+        width: 150px;
+        line-height: 20px;
+        margin-bottom: 10px;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #383095;
+        border-color: #383095;
+    }
+</style>
+<div class="col-md-12 p-0">
+    <ul class="nav">
+        <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#">OMS Data</a> </li>
+    </ul>
+    <hr class="m-0">
+</div>
+
+<br />
+<div ng-app="myApp" ng-controller="OMSData">
+    <div class="container">
+        <div class="panel panel-default">
+            <div style="margin-left:10%">
+                <form class="form-inline">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label> Security Types</label>
+                        <select ng-model="SecurityType" id="CLAIM_TYPE" ng-options="item as item.Name for item in securityTypes" class="form-control"></select>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <button type="submit" class="btn btn-primary mb-2" ng-disabled="SecurityType.Name==='Select'" ng-click="GetGridRecord(SecurityType.ID)">
+                            <span ng-show="searchButtonText == 'Searching'">
+                                <img style="width:20px;height:20px;" src="~/images/loader.gif" />
+                            </span>
+                            {{ searchButtonText }}
+                        </button>
+                    </div>
+                    <div class="form-group mb-2">
+
+                    </div>
+
+                    @* <i class="fa fa-file-excel-o" style="font-size:20px" ng-click="exportToExcel(AS_ON_DATE,CLAIM_TYPE)" aria-hidden="true"></i>*@
+                </form>
+            </div>
+        </div>
+    </div>
+    <br />
+    @*<button type="submit" class="btn btn-primary mb-2" ng-hide="isAssignBtnHide" ng-click="AssignBatchNumber(RevisedExpenseGridData)">Assign Batch Number</button>
+        <button type="button" class="btn btn-primary mb-2" id="exportSubmit" ng-hide="isAssignBtnHide">Export To Excel</button>
+        <form id="exportData" action="/ProcessOfRecord/GetExportToExcel" style="display:none">
+            <input type="text" value="" name="AsOnDate" />
+            <input type="text" value="" name="ClaimType" />
+        </form>*@
+    <div style="overflow:auto">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr style="background-color:darkgrey">
+                    <th>SR_NO</th>
+                    @*<th>Select All<input type="checkbox" ng-model="SELECT_STATUS" ng-change="CheckboxActiity(0,SELECT_STATUS,1)"></th>*@
+                    <th>Issuer_Name______________________</th>
+                    <th>ISIN</th>
+                    <th>Maturity_Date</th>
+                    <th>Put_Call</th>
+                    <th>Rating </th>
+                    <th>Structure</th>
+                    <th>Reason_for_poll </th>
+                    <th>Traded_Yeild</th>
+                    <th>Quantum_CR</th>
+                    @*<th>Other_info</th>*@
+                    <th>Yesterday_Valuation</th>
+                    <th>Clasification</th>
+                    <th>OMS_Level</th>
+                    <th>OMS_Range</th>
+                    <th>Comment_Type___________</th>
+                    <th>Comments_For_Poll_Provider</th>
+                    <th>Action__________</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in OMS_data track by $index">
+                    <td>{{$index+1}}</td>
+                    @*<td><input type="checkbox" ng-checked="item.SELECT_STATUS" ng-model="item.SELECT_STATUS" ng-change="CheckboxActiity($index,item.SELECT_STATUS,0)" /></td>*@
+                    <td class="text-capitalize">{{item.Issuer_Name}}</td>
+                    <td>{{item.ISIN}}</td>
+                    <td>{{item.Maturity_Date | date:'dd-MMM-yyyy'}}</td>
+                    <td>{{item.Put_Call}}</td>
+                    <td>{{item.Rating}} </td>
+                    <td>{{item.Structure}}</td>
+                    <td>{{item.Reason_for_poll}} </td>
+                    <td>{{item.Traded_Yeild}}</td>
+                    <td>{{item.Quantum_CR}}</td>
+                    @*<td>{{item.Other_info}}</td>*@
+                    <td>{{item.Yesterday_Valuation}}</td>
+                    <td>{{item.Clasification}}</td>
+                    <td><input class="form-control" ng-model="item.OMS_Level" /> </td>
+                    <td><input class="form-control" ng-model="item.OMS_Range" /></td>
+                    <td><select ng-model="item.Comment_Type_ID" id="CommentType" ng-options="item.ID as item.Name for item in commentTypes" class="form-control"></select></td>
+                    @*<td><input class="form-control" ng-model="item.Comments_For_Poll_Provider" ng-disabled="item.Comment_Type_ID!==2"/></td>*@
+                    <td><input class="form-control" ng-model="item.Comments_For_Poll_Provider" ng-disabled="item.Comment_Type_ID===1006"/></td>
+                    <td>
+                        <button type="submit" class="btn btn-primary mb-2" ng-click="save(item,$index)">
+                            <span ng-show="item.action_status == 'Saving...'">
+                                <img style="width:20px;height:20px;" src="~/images/loader.gif" />
+                            </span>
+                            {{item.action_status}}
+                            @*<i class="fa fa-check"></i>*@
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+        if ($('[type="date"]').prop('type') != 'date') {
+            $('[type="date"]').datepicker();
+        }
+
+        $("#exportSubmit").click(function () {
+
+            debugger;
+            var AsOnDate = $("#AS_ON_DATE").val();
+            var ClaimType = $("#CLAIM_TYPE option:selected").text();
+
+            $("#exportData input[name=AsOnDate]").val(AsOnDate);
+            $("#exportData input[name=ClaimType]").val(ClaimType);
+            $("#exportData").submit();
+
+        })
+    });
+</script>

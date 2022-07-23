@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "LovCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid" ng-controller="LovCategory">
+    <div class="row">
+        <div class="col-md-12 p-0">
+            <ul class="nav">
+                <li class="nav-item"> <a class="nav-link text-dark" href="javascript:void(0);"><strong>Statistics</strong></a> </li>
+                <li class="nav-item"> <a class="nav-link" href="/LovCategory/Item/0">Category Master</a> </li>
+            </ul>
+            <hr class="m-0">
+        </div>
+    </div>
+    <div class="row">
+        <article class="col-md-12">
+            <div class="pt-3">
+                <div class="mb-4"> <a href="/LovCategory/Item/0" class="btn btn-secondary float-right ml-1">+</a></div>
+            </div>
+        </article>
+    </div>
+    <div class="row">
+        <div class="col-md-12" >
+            <table class="table table-hover table-bordered" id="table_id">
+                <thead>
+                    <tr style="background-color:darkgrey">
+                        <th>SrNo</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Is Active</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
